@@ -1,0 +1,3 @@
+--clausifier res/vclausify_rel
+--clausifier_options --mode tclausify  --show_fool true -t 100
+--sub_typing false
