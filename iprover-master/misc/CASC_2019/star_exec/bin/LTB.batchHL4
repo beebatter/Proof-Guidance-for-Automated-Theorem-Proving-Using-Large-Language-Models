@@ -1,0 +1,23 @@
+division.category LTB.HL4
+division.category.training_data TrainingData.HL4.tgz
+% SZS start BatchConfiguration
+execution.order unordered
+output.required Proof
+limit.time.problem.wc 0
+limit.time.overall.wc 450
+% SZS end BatchConfiguration
+% SZS start BatchIncludes
+include('Axioms/HL4001*.ax').
+% SZS end BatchIncludes
+% SZS start BatchProblems
+Problems/HL400001*.p HL400001
+Problems/HL400023*.p HL400023
+Problems/HL400048*.p HL400048
+Problems/HL400058*.p HL400058
+Problems/HL400079*.p HL400079
+Problems/HL400088*.p HL400088
+Problems/HL400102*.p HL400102
+Problems/HL400133*.p HL400133
+Problems/HL400134*.p HL400134
+Problems/HL400137*.p HL400137
+% SZS end BatchProblems

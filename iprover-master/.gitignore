@@ -1,0 +1,6 @@
+# generated file -- ignore
+Makefile.extras
+ocamlgraph/ocamlgraph-1.8.8/.depend
+*/__init__.py
+*/__pycache__
+sandobx

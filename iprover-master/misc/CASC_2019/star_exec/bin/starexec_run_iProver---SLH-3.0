@@ -1,0 +1,8 @@
+#!/bin/tcsh
+
+setenv HERE `dirname $0`
+setenv TPTP `dirname $1`
+
+setenv CPU_CORES 4
+
+$HERE/iproveropt_run_ltb_single.sh LTB.SLH $CPU_CORES $STAREXEC_WALLCLOCK_LIMIT $1

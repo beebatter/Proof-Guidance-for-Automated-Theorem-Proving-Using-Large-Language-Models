@@ -1,0 +1,4 @@
+executables: 
+
+eprover              
+eprover_pure_cnf.sh 

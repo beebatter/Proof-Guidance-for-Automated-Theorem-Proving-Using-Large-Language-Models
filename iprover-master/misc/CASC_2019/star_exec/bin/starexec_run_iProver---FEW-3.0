@@ -1,0 +1,10 @@
+#!/bin/tcsh
+
+# commented for StarExec in Miami 
+# module add python/python33
+
+setenv HERE `dirname $0`
+setenv TPTP `dirname $1`
+
+python3 -u $HERE/casc_ltb_iprover.py FEW $1 $STAREXEC_WALLCLOCK_LIMIT
+

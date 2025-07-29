@@ -1,0 +1,116 @@
+#!/bin/bash
+
+NEWCONDA_DEFAULT=`pwd`"/conda/"
+CONDA_ENV_DEFAULT="iserver"
+UPDATE_CONDA=false
+MAKEFILE_CONF="Makefile.configure"
+#CONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+#CONDA_URL="https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+CONDA_URL="https://github.com/conda-forge/miniforge/releases/download/25.3.0-3/Miniforge3-25.3.0-3-Linux-x86_64.sh“
+#CONDA_URL="https://micro.mamba.pm/install.sh"
+
+OPAM_DEFAULT="iserver_iprover"
+
+if [ -f "$MAKEFILE_CONF" ]
+then
+    while true; do
+	read -p "Do you want to remove and replace $MAKEFILE_CONF? (y/N) " answer
+	case "$answer" in
+	    [Yy] ) rm "$MAKEFILE_CONF"; break;;
+	    [Nn]|"" ) exit 1;;
+	esac
+    done
+fi
+
+echo "Your OPAM switches:"
+opam switch list
+
+while true; do
+    read -p "Do you want to create a new OPAM switch? (Y/n) " answer
+    case "$answer" in
+	[Yy]|"" ) NEW_OPAM=true; break;;
+	[Nn] ) NEW_OPAM=false; break;;
+    esac
+done
+
+read -p "Select an OPAM switch name (default: $OPAM_DEFAULT): " answer
+case "$answer" in
+    "" ) OPAM_SWITCH="$OPAM_DEFAULT";;
+    * ) OPAM_SWITCH="$answer";;
+esac
+
+read -p "Select a conda environment name (default: $CONDA_ENV_DEFAULT): " answer
+case "$answer" in
+    "" ) CONDA_ENV="$CONDA_ENV_DEFAULT";;
+    * ) CONDA_ENV="$answer";;
+esac
+
+
+while true; do
+    read -p "Do you want to create a new conda installation? (Y/n) " answer
+    case "$answer" in
+	[Yy]|"" ) NEW_CONDA=true; conda_default="$NEWCONDA_DEFAULT"; break;;
+	# $CONDA_PREFIX contains where the currect conda is...
+	[Nn] ) NEW_CONDA=false; conda_default="$CONDA_PREFIX"; break;;
+    esac
+done
+
+read -p "Select a conda directory (default: $conda_default): " answer
+case "$answer" in
+    "" ) CONDA_DIR="$conda_default";;
+    * ) CONDA_DIR="$answer";;
+esac
+
+read -p "Select a conda environment name (default: $CONDA_ENV_DEFAULT): " answer
+case "$answer" in
+    "" ) CONDA_ENV="$CONDA_ENV_DEFAULT";;
+    * ) CONDA_ENV="$answer";;
+esac
+
+# Install new conda if needed...
+if [ "$NEW_CONDA" = true ]
+then
+    if [ -d "$CONDA_DIR" ]
+    then
+	echo "The install prefix ($CONDA_DIR) already exists, use a fresh directory!"
+	exit 1
+    fi
+
+    conda_download="$(mktemp).sh"
+    echo "Downloading conda ($CONDA_URL)..."
+    curl -L -o "$conda_download" "$CONDA_URL"
+    bash "$conda_download" -s -b -p "$CONDA_DIR"
+    rm "$conda_download"
+else
+    if [ -f "$CONDA_DIR/bin/conda" ]
+    then
+	conda_env_dir="$CONDA_DIR/envs/$CONDA_ENV"
+	if [ -d "$conda_env_dir" ]
+	then
+	    while true; do
+		read -p "Update existing environment ($conda_env_dir)? (y/N) " answer
+		case "$answer" in
+		    [Yy] ) UPDATE_CONDA=true; break;;
+		    [Nn]|"" ) break;;
+		esac
+	    done
+	fi
+    else
+	echo "$CONDA_DIR does not contain a conda!"
+	exit 1
+    fi
+fi
+
+echo "Writing into $MAKEFILE_CONF."
+echo "# Created using ./configure" >> "$MAKEFILE_CONF"
+
+var_to_export=("CONDA_DIR" "CONDA_ENV" "UPDATE_CONDA" "NEW_CONDA" "NEW_OPAM" "OPAM_SWITCH")
+
+for var in ${var_to_export[@]}; do
+    echo "$var=$(eval echo \$$var)" >> "$MAKEFILE_CONF"
+done
+
+#echo "CONDA_DIR=\"$CONDA_DIR\"" >> "$MAKEFILE_CONF"
+#echo "CONDA_ENV=\"$CONDA_ENV\"" >> "$MAKEFILE_CONF"
+#echo "UPDATE_CONDA=$UPDATE_CONDA" >> "$MAKEFILE_CONF"
+#echo "NEW_CONDA=$NEW_CONDA" >> "MAKEFILE_CONF"

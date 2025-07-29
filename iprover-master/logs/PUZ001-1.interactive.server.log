@@ -1,0 +1,1113 @@
+% run with 
+% server: 
+% ./sockets_server --interactive_mode true --external_ip_address "127.0.0.1" --external_port 12345 
+
+% iprover: 
+% ./iproveropt --interactive_mode true --external_ip_address "127.0.0.1" --external_port 12345 --schedule none --preprocessing_flag false --instantiation_flag true --superposition_flag true  --resolution_flag false --sup_iter_deepening 0 --comb_sup_deep_mult 0 --sup_passive_queue_type priority_queues --sup_passive_queues_freq "[1]" --sup_passive_queues "[[+external_score]]"  Examples/PUZ001-1.p
+
+% to get such trace; set "let dbg_global_flag = true" in src/lib.ml before compiling iProver and sockets_server
+
+
+warning: lib.ml: dbg_global_flag=true
+warning: lib.ml: dassert_global_flag=true
+
+%---------------- iProver v3.7 (post CASC-J11 2022) ----------------%
+
+warning: parser_types.ml: unsupported defined symbols treated as uninterpred
+warning: prop_lit_to_fof_flag: true
+warning: DemodulationIndex: fwd_only_orientable_flag: false
+warning: DemodulationIndexPerfect: demodulationIndex fwd_only_orientable_flag: false
+warning: LightNormalisationIndex:use_non_ground true
+warning: Sockets: dbg_flag=true
+warning: use_rec_defs_flag: true
+warning: def_merge_tr_red_non_prop_flag: true
+warning: instantiation_loop:sth_get_sel_lits_in_phase_solver_consist
+warning: finite_models commented: preprocess_after_flattening
+warning: when_born_iter_flag: true
+warning: proof_search_loop: ps_stagnation_limit:1000
+warning: pred_elim_qbf: true
+warning: dbg_qbf_res_prep_flag: true
+warning: Sockets_server: dbg_flag=true
+%---------------- External Agent Test Server 
+
+ 
+Sockets_server:trace: before:Unix.bind s_descr addr
+Sockets_server:trace: before: Unix.listen s_descr
+Sockets_server:trace: after: Unix.listen s_descr
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "register_clauses",
+  "clauses": [
+    {
+      "clause": "cnf(c_51,plain,(lives(charles)),file('Examples/PUZ001-1.p', charles)).",
+      "clause_id": 51,
+      "clause_features": {
+        "basic_clause_id": 51,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_50,plain,(lives(butler)),file('Examples/PUZ001-1.p', butler)).",
+      "clause_id": 50,
+      "clause_features": {
+        "basic_clause_id": 50,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_49,plain,(lives(agatha)),file('Examples/PUZ001-1.p', agatha)).",
+      "clause_id": 49,
+      "clause_features": {
+        "basic_clause_id": 49,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_56,plain,(hates(agatha,charles)),file('Examples/PUZ001-1.p', agatha_hates_charles)).",
+      "clause_id": 56,
+      "clause_features": {
+        "basic_clause_id": 56,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_55,plain,(hates(agatha,agatha)),file('Examples/PUZ001-1.p', agatha_hates_agatha)).",
+      "clause_id": 55,
+      "clause_features": {
+        "basic_clause_id": 55,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_60,negated_conjecture,(killed(butler,agatha)|killed(charles,agatha)),file('Examples/PUZ001-1.p', prove_neither_charles_nor_butler_did_it)).",
+      "clause_id": 60,
+      "clause_features": {
+        "basic_clause_id": 60,
+        "conj_dist": 0,
+        "born": 1,
+        "horn": false,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_58,plain,(~hates(agatha,X0)|hates(butler,X0)),file('Examples/PUZ001-1.p', same_hates)).",
+      "clause_id": 58,
+      "clause_features": {
+        "basic_clause_id": 58,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_57,plain,(~killed(X0,X1)|hates(X0,X1)),file('Examples/PUZ001-1.p', killer_hates_victim)).",
+      "clause_id": 57,
+      "clause_features": {
+        "basic_clause_id": 57,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_53,plain,(~hates(agatha,X0)|~hates(charles,X0)),file('Examples/PUZ001-1.p', different_hates)).",
+      "clause_id": 53,
+      "clause_features": {
+        "basic_clause_id": 53,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_52,plain,(~killed(X0,X1)|~richer(X0,X1)),file('Examples/PUZ001-1.p', poorer_killer)).",
+      "clause_id": 52,
+      "clause_features": {
+        "basic_clause_id": 52,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_59,plain,(~lives(X0)|richer(X0,agatha)|hates(butler,X0)),file('Examples/PUZ001-1.p', butler_hates_poor)).",
+      "clause_id": 59,
+      "clause_features": {
+        "basic_clause_id": 59,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": false,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_54,plain,(~hates(X0,agatha)|~hates(X0,butler)|~hates(X0,charles)),file('Examples/PUZ001-1.p', no_one_hates_everyone)).",
+      "clause_id": 54,
+      "clause_features": {
+        "basic_clause_id": 54,
+        "conj_dist": -1,
+        "born": 1,
+        "horn": true,
+        "epr": true
+      }
+    }
+  ]
+}
+
+Sockets_server:trace: process tag: register_clauses
+Sockets_server:trace: registring clause_ids: 12 
+cnf(c_51,plain,(lives(charles)),file('Examples/PUZ001-1.p', charles)).
+cnf(c_50,plain,(lives(butler)),file('Examples/PUZ001-1.p', butler)).
+cnf(c_49,plain,(lives(agatha)),file('Examples/PUZ001-1.p', agatha)).
+cnf(c_56,plain,(hates(agatha,charles)),file('Examples/PUZ001-1.p', agatha_hates_charles)).
+cnf(c_55,plain,(hates(agatha,agatha)),file('Examples/PUZ001-1.p', agatha_hates_agatha)).
+cnf(c_60,negated_conjecture,(killed(butler,agatha)|killed(charles,agatha)),file('Examples/PUZ001-1.p', prove_neither_charles_nor_butler_did_it)).
+cnf(c_58,plain,(~hates(agatha,X0)|hates(butler,X0)),file('Examples/PUZ001-1.p', same_hates)).
+cnf(c_57,plain,(~killed(X0,X1)|hates(X0,X1)),file('Examples/PUZ001-1.p', killer_hates_victim)).
+cnf(c_53,plain,(~hates(agatha,X0)|~hates(charles,X0)),file('Examples/PUZ001-1.p', different_hates)).
+cnf(c_52,plain,(~killed(X0,X1)|~richer(X0,X1)),file('Examples/PUZ001-1.p', poorer_killer)).
+cnf(c_59,plain,(~lives(X0)|richer(X0,agatha)|hates(butler,X0)),file('Examples/PUZ001-1.p', butler_hates_poor)).
+cnf(c_54,plain,(~hates(X0,agatha)|~hates(X0,butler)|~hates(X0,charles)),file('Examples/PUZ001-1.p', no_one_hates_everyone)).
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "scores_req",
+  "clause_ids": [ 51, 50, 49, 56, 55, 60, 58, 57, 53, 52, 59, 54 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: scores_req
+Sockets_server:trace: scoring clauses: 12 
+ cnf(c_51,plain,(lives(charles)),file('Examples/PUZ001-1.p', charles)).
+cnf(c_50,plain,(lives(butler)),file('Examples/PUZ001-1.p', butler)).
+cnf(c_49,plain,(lives(agatha)),file('Examples/PUZ001-1.p', agatha)).
+cnf(c_56,plain,(hates(agatha,charles)),file('Examples/PUZ001-1.p', agatha_hates_charles)).
+cnf(c_55,plain,(hates(agatha,agatha)),file('Examples/PUZ001-1.p', agatha_hates_agatha)).
+cnf(c_60,negated_conjecture,(killed(butler,agatha)|killed(charles,agatha)),file('Examples/PUZ001-1.p', prove_neither_charles_nor_butler_did_it)).
+cnf(c_58,plain,(~hates(agatha,X0)|hates(butler,X0)),file('Examples/PUZ001-1.p', same_hates)).
+cnf(c_57,plain,(~killed(X0,X1)|hates(X0,X1)),file('Examples/PUZ001-1.p', killer_hates_victim)).
+cnf(c_53,plain,(~hates(agatha,X0)|~hates(charles,X0)),file('Examples/PUZ001-1.p', different_hates)).
+cnf(c_52,plain,(~killed(X0,X1)|~richer(X0,X1)),file('Examples/PUZ001-1.p', poorer_killer)).
+cnf(c_59,plain,(~lives(X0)|richer(X0,agatha)|hates(butler,X0)),file('Examples/PUZ001-1.p', butler_hates_poor)).
+cnf(c_54,plain,(~hates(X0,agatha)|~hates(X0,butler)|~hates(X0,charles)),file('Examples/PUZ001-1.p', no_one_hates_everyone)).
+
+Sockets_server:trace: json in:
+ { "tag": "server_queries_start" }
+
+Sockets_server:trace: processing tag: server_queries_start 
+
+Sockets_server:trace: json out:
+ {
+  "tag": "cls_sat_eval_gr_req",
+  "clause_ids": [ 51, 50, 49, 56, 55, 60, 58, 57, 53, 52, 59, 54 ]
+}
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 51, 50, 49, 56, 55, 60, 58, 57, 53, 52, 59, 54 ],
+  "sat_lit_gr_vals": [
+    [ true ],
+    [ true ],
+    [ true ],
+    [ true ],
+    [ true ],
+    [ true, true ],
+    [ false, true ],
+    [ false, true ],
+    [ false, false ],
+    [ false, false ],
+    [ false, true, true ],
+    [ false, false, false ]
+  ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "sat_solver_exec_req" }
+
+Sockets_server:trace: json in:
+ { "tag": "sat_solver_exec_res", "result": "sat" }
+
+Sockets_server:trace: json out:
+ {
+  "tag": "cls_sat_eval_gr_req",
+  "clause_ids": [ 51, 50, 49, 56, 55, 60, 58, 57, 53, 52, 59, 54 ]
+}
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 51, 50, 49, 56, 55, 60, 58, 57, 53, 52, 59, 54 ],
+  "sat_lit_gr_vals": [
+    [ true ],
+    [ true ],
+    [ true ],
+    [ true ],
+    [ true ],
+    [ true, false ],
+    [ false, true ],
+    [ true, true ],
+    [ false, true ],
+    [ true, true ],
+    [ false, false, true ],
+    [ false, true, false ]
+  ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "server_queries_end" }
+
+Sockets_server:trace: json out:
+ {
+  "tag": "scores_res",
+  "scores": [
+    0.014285714285714285, 0.014705882352941176, 0.014705882352941176,
+    0.011111111111111112, 0.011363636363636364, 0.006896551724137931,
+    0.010752688172043012, 0.010526315789473684, 0.01, 0.01098901098901099,
+    0.009009009009009009, 0.008064516129032258
+  ]
+}
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "passive_clauses",
+  "clause_ids": [ 51, 50, 49, 56, 55, 60, 58, 57, 53, 52, 59, 54 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: passive_clauses
+Sockets_server:trace: component: 1 passive clauses: 12 
+[51,50,49,56,55,60,58,57,53,52,59,54]
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 49 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 50 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 51 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 55 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 56 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 52 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 58 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "register_clauses",
+  "clauses": [
+    {
+      "clause": "cnf(c_73,plain,(hates(butler,charles)),inference(superposition,[status(thm)],[c_56,c_58])).",
+      "clause_id": 73,
+      "clause_features": {
+        "basic_clause_id": 71,
+        "conj_dist": -1,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_72,plain,(hates(butler,agatha)),inference(superposition,[status(thm)],[c_55,c_58])).",
+      "clause_id": 72,
+      "clause_features": {
+        "basic_clause_id": 70,
+        "conj_dist": -1,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    }
+  ]
+}
+
+Sockets_server:trace: process tag: register_clauses
+Sockets_server:trace: registring clause_ids: 2 
+cnf(c_73,plain,(hates(butler,charles)),inference(superposition,[status(thm)],[c_56,c_58])).
+cnf(c_72,plain,(hates(butler,agatha)),inference(superposition,[status(thm)],[c_55,c_58])).
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "scores_req",
+  "clause_ids": [ 73, 72 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: scores_req
+Sockets_server:trace: scoring clauses: 2 
+ cnf(c_73,plain,(hates(butler,charles)),inference(superposition,[status(thm)],[c_56,c_58])).
+cnf(c_72,plain,(hates(butler,agatha)),inference(superposition,[status(thm)],[c_55,c_58])).
+
+Sockets_server:trace: json in:
+ { "tag": "server_queries_start" }
+
+Sockets_server:trace: processing tag: server_queries_start 
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 73, 72 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 73, 72 ],
+  "sat_lit_gr_vals": [ [ true ], [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "sat_solver_exec_req" }
+
+Sockets_server:trace: json in:
+ { "tag": "sat_solver_exec_res", "result": "sat" }
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 73, 72 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 73, 72 ],
+  "sat_lit_gr_vals": [ [ true ], [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "server_queries_end" }
+
+Sockets_server:trace: json out:
+ {
+  "tag": "scores_res",
+  "scores": [ 0.01098901098901099, 0.011111111111111112 ]
+}
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "passive_clauses",
+  "clause_ids": [ 73, 72 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: passive_clauses
+Sockets_server:trace: component: 1 passive clauses: 2 
+[73,72]
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 72 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 73 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 57 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 53 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "register_clauses",
+  "clauses": [
+    {
+      "clause": "cnf(c_83,plain,(~hates(charles,charles)),inference(superposition,[status(thm)],[c_56,c_53])).",
+      "clause_id": 83,
+      "clause_features": {
+        "basic_clause_id": 77,
+        "conj_dist": -1,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_82,plain,(~hates(charles,agatha)),inference(superposition,[status(thm)],[c_55,c_53])).",
+      "clause_id": 82,
+      "clause_features": {
+        "basic_clause_id": 76,
+        "conj_dist": -1,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    }
+  ]
+}
+
+Sockets_server:trace: process tag: register_clauses
+Sockets_server:trace: registring clause_ids: 2 
+cnf(c_83,plain,(~hates(charles,charles)),inference(superposition,[status(thm)],[c_56,c_53])).
+cnf(c_82,plain,(~hates(charles,agatha)),inference(superposition,[status(thm)],[c_55,c_53])).
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "scores_req",
+  "clause_ids": [ 83, 82 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: scores_req
+Sockets_server:trace: scoring clauses: 2 
+ cnf(c_83,plain,(~hates(charles,charles)),inference(superposition,[status(thm)],[c_56,c_53])).
+cnf(c_82,plain,(~hates(charles,agatha)),inference(superposition,[status(thm)],[c_55,c_53])).
+
+Sockets_server:trace: json in:
+ { "tag": "server_queries_start" }
+
+Sockets_server:trace: processing tag: server_queries_start 
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 83, 82 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 83, 82 ],
+  "sat_lit_gr_vals": [ [ false ], [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "sat_solver_exec_req" }
+
+Sockets_server:trace: json in:
+ { "tag": "sat_solver_exec_res", "result": "sat" }
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 83, 82 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 83, 82 ],
+  "sat_lit_gr_vals": [ [ true ], [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "server_queries_end" }
+
+Sockets_server:trace: json out:
+ {
+  "tag": "scores_res",
+  "scores": [ 0.010752688172043012, 0.010869565217391304 ]
+}
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "passive_clauses",
+  "clause_ids": [ 83, 82 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: passive_clauses
+Sockets_server:trace: component: 1 passive clauses: 2 
+[83,82]
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 82 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 83 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 59 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 54 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "register_clauses",
+  "clauses": [
+    {
+      "clause": "cnf(c_99,plain,(~hates(agatha,butler)),inference(forward_subsumption_resolution,[status(thm)],[c_96,c_56])).",
+      "clause_id": 99,
+      "clause_features": {
+        "basic_clause_id": 87,
+        "conj_dist": -1,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_98,plain,(~hates(butler,butler)),inference(forward_subsumption_resolution,[status(thm)],[c_97,c_73])).",
+      "clause_id": 98,
+      "clause_features": {
+        "basic_clause_id": 86,
+        "conj_dist": -1,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    }
+  ]
+}
+
+Sockets_server:trace: process tag: register_clauses
+Sockets_server:trace: registring clause_ids: 2 
+cnf(c_99,plain,(~hates(agatha,butler)),inference(forward_subsumption_resolution,[status(thm)],[c_96,c_56])).
+cnf(c_98,plain,(~hates(butler,butler)),inference(forward_subsumption_resolution,[status(thm)],[c_97,c_73])).
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "scores_req",
+  "clause_ids": [ 99, 98 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: scores_req
+Sockets_server:trace: scoring clauses: 2 
+ cnf(c_99,plain,(~hates(agatha,butler)),inference(forward_subsumption_resolution,[status(thm)],[c_96,c_56])).
+cnf(c_98,plain,(~hates(butler,butler)),inference(forward_subsumption_resolution,[status(thm)],[c_97,c_73])).
+
+Sockets_server:trace: json in:
+ { "tag": "server_queries_start" }
+
+Sockets_server:trace: processing tag: server_queries_start 
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 99, 98 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 99, 98 ],
+  "sat_lit_gr_vals": [ [ true ], [ false ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "sat_solver_exec_req" }
+
+Sockets_server:trace: json in:
+ { "tag": "sat_solver_exec_res", "result": "sat" }
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 99, 98 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 99, 98 ],
+  "sat_lit_gr_vals": [ [ true ], [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "server_queries_end" }
+
+Sockets_server:trace: json out:
+ {
+  "tag": "scores_res",
+  "scores": [ 0.009259259259259259, 0.009259259259259259 ]
+}
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "passive_clauses",
+  "clause_ids": [ 99, 98 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: passive_clauses
+Sockets_server:trace: component: 1 passive clauses: 2 
+[99,98]
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 98 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 99 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 60 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "simplified_clauses",
+  "clause_ids": [ 60 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: simplified_clauses
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "register_clauses",
+  "clauses": [
+    {
+      "clause": "cnf(c_106,plain,(killed(butler,agatha)),inference(forward_subsumption_resolution,[status(thm)],[c_104,c_82])).",
+      "clause_id": 106,
+      "clause_features": {
+        "basic_clause_id": 92,
+        "conj_dist": 2,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    }
+  ]
+}
+
+Sockets_server:trace: process tag: register_clauses
+Sockets_server:trace: registring clause_ids: 1 
+cnf(c_106,plain,(killed(butler,agatha)),inference(forward_subsumption_resolution,[status(thm)],[c_104,c_82])).
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "scores_req",
+  "clause_ids": [ 106 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: scores_req
+Sockets_server:trace: scoring clauses: 1 
+ cnf(c_106,plain,(killed(butler,agatha)),inference(forward_subsumption_resolution,[status(thm)],[c_104,c_82])).
+
+Sockets_server:trace: json in:
+ { "tag": "server_queries_start" }
+
+Sockets_server:trace: processing tag: server_queries_start 
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 106 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 106 ],
+  "sat_lit_gr_vals": [ [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "sat_solver_exec_req" }
+
+Sockets_server:trace: json in:
+ { "tag": "sat_solver_exec_res", "result": "sat" }
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 106 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 106 ],
+  "sat_lit_gr_vals": [ [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "server_queries_end" }
+
+Sockets_server:trace: json out:
+ { "tag": "scores_res", "scores": [ 0.00909090909090909 ] }
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "passive_clauses",
+  "clause_ids": [ 106 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: passive_clauses
+Sockets_server:trace: component: 1 passive clauses: 1 
+[106]
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 106 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "register_clauses",
+  "clauses": [
+    {
+      "clause": "cnf(c_108,plain,(~richer(butler,agatha)),inference(superposition,[status(thm)],[c_106,c_52])).",
+      "clause_id": 108,
+      "clause_features": {
+        "basic_clause_id": 93,
+        "conj_dist": 3,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    }
+  ]
+}
+
+Sockets_server:trace: process tag: register_clauses
+Sockets_server:trace: registring clause_ids: 1 
+cnf(c_108,plain,(~richer(butler,agatha)),inference(superposition,[status(thm)],[c_106,c_52])).
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "scores_req",
+  "clause_ids": [ 108 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: scores_req
+Sockets_server:trace: scoring clauses: 1 
+ cnf(c_108,plain,(~richer(butler,agatha)),inference(superposition,[status(thm)],[c_106,c_52])).
+
+Sockets_server:trace: json in:
+ { "tag": "server_queries_start" }
+
+Sockets_server:trace: processing tag: server_queries_start 
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 108 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 108 ],
+  "sat_lit_gr_vals": [ [ false ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "sat_solver_exec_req" }
+
+Sockets_server:trace: json in:
+ { "tag": "sat_solver_exec_res", "result": "sat" }
+
+Sockets_server:trace: json out:
+ { "tag": "cls_sat_eval_gr_req", "clause_ids": [ 108 ] }
+
+Sockets_server:trace: json in:
+ {
+  "tag": "cls_sat_eval_gr_res",
+  "clause_ids": [ 108 ],
+  "sat_lit_gr_vals": [ [ true ] ]
+}
+
+Sockets_server:trace: json out:
+ { "tag": "server_queries_end" }
+
+Sockets_server:trace: json out:
+ { "tag": "scores_res", "scores": [ 0.010638297872340425 ] }
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "passive_clauses",
+  "clause_ids": [ 108 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: passive_clauses
+Sockets_server:trace: component: 1 passive clauses: 1 
+[108]
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "given_clause",
+  "clause_ids": [ 108 ],
+  "component": "sup",
+  "component_id": 1
+}
+
+Sockets_server:trace: process tag: given_clause
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "szs_result_out",
+  "szs_status": "% SZS status Unsatisfiable for PUZ001-1.p"
+}
+
+Sockets_server:trace: process tag: szs_result_out
+% SZS status Unsatisfiable for PUZ001-1.p
+
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "register_clauses",
+  "clauses": [
+    {
+      "clause": "cnf(c_97,plain,(~hates(butler,butler)|~hates(butler,charles)),inference(superposition,[status(thm)],[c_72,c_54])).",
+      "clause_id": 97,
+      "clause_features": {
+        "basic_clause_id": 85,
+        "conj_dist": -1,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_104,plain,(killed(butler,agatha)|hates(charles,agatha)),inference(superposition,[status(thm)],[c_60,c_57])).",
+      "clause_id": 104,
+      "clause_features": {
+        "basic_clause_id": 90,
+        "conj_dist": 1,
+        "born": 2,
+        "horn": false,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_109,plain,(~lives(butler)|hates(butler,butler)),inference(superposition,[status(thm)],[c_59,c_108])).",
+      "clause_id": 109,
+      "clause_features": {
+        "basic_clause_id": 94,
+        "conj_dist": 4,
+        "born": 2,
+        "horn": true,
+        "epr": true
+      }
+    },
+    {
+      "clause": "cnf(c_110,plain,($false),inference(forward_subsumption_resolution,[status(thm)],[c_109,c_98,c_50])).",
+      "clause_id": 110,
+      "clause_features": {
+        "basic_clause_id": 95,
+        "conj_dist": 5,
+        "born": 2,
+        "horn": false,
+        "epr": true
+      }
+    }
+  ]
+}
+
+Sockets_server:trace: process tag: register_clauses
+Sockets_server:trace: registring clause_ids: 4 
+cnf(c_97,plain,(~hates(butler,butler)|~hates(butler,charles)),inference(superposition,[status(thm)],[c_72,c_54])).
+cnf(c_104,plain,(killed(butler,agatha)|hates(charles,agatha)),inference(superposition,[status(thm)],[c_60,c_57])).
+cnf(c_109,plain,(~lives(butler)|hates(butler,butler)),inference(superposition,[status(thm)],[c_59,c_108])).
+cnf(c_110,plain,($false),inference(forward_subsumption_resolution,[status(thm)],[c_109,c_98,c_50])).
+Sockets_server:trace: while loop
+
+Sockets_server:trace: read in:
+ {
+  "tag": "proof_out",
+  "clause_ids": [
+    50, 52, 53, 54, 55, 56, 57, 58, 59, 60, 72, 73, 82, 97, 98, 104, 106,
+    108, 109, 110
+  ],
+  "component": "proof",
+  "component_id": -1
+}
+
+Sockets_server:trace: process tag: proof_out
+Sockets_server:trace: while loop
+
+end of input; exiting

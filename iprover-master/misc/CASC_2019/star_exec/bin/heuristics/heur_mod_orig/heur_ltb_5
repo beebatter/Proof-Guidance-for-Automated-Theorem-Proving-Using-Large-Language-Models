@@ -1,0 +1,1 @@
+--clausifier VClausifier/vclausify_rel --clausifier_options "--mode clausify -t {0:.2f} -ss axioms -sd 2 -st 1.0" --abstr_ref '[sig]' --abstr_ref_sig_restrict skc --abstr_ref_until_sat false 

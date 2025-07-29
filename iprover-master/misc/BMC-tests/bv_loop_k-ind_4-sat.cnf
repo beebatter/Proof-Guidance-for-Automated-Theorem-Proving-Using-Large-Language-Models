@@ -1,0 +1,121 @@
+%----------------------------------------------
+% problem: bv_loop_k-ind_4-sat.cnf
+% category: bit-vector loop problem
+%
+% notes:
+% This problem can be DISPROVED using BMC at 4 bounds
+%----------------------------------------------
+
+tff(sort_def_8,type, $$state_type: $tType ).
+tff(sort_def_9,type, $$address_type: $tType | $attr($addressMaxWidth, 0) ).
+tff(sort_def_10,type, $$bitindex_type: $tType ).
+tff(func_def_0,type, $$constB0: $$state_type | $attr($state_constant, 0) ).
+tff(func_def_1,type, sK_VarCurr: $$state_type ).
+tff(pred_def_12,type, $$nextState: ($$state_type * $$state_type) > $o | $attr($built_in, vapi_pre_processing) ).
+tff(pred_def_x,type, x: $$state_type > $o | $attr($bit_vector, 1) ).
+% definitions for bits of b
+tff(pred_def_b_bit_0,type, b_0: $$state_type > $o | $attr($bit_vector, 1) ).
+tff(pred_def_b_bit_1,type, b_1: $$state_type > $o | $attr($bit_vector, 1) ).
+tff(pred_def_b_bit_2,type, b_2: $$state_type > $o | $attr($bit_vector, 1) ).
+tff(pred_def_b_bit_3,type, b_3: $$state_type > $o | $attr($bit_vector, 1) ).
+% definitions for bits of acc
+tff(pred_def_acc_bit_0,type, acc_0: $$state_type > $o | $attr($bit_vector, 1) ).
+tff(pred_def_acc_bit_1,type, acc_1: $$state_type > $o | $attr($bit_vector, 1) ).
+tff(pred_def_acc_bit_2,type, acc_2: $$state_type > $o | $attr($bit_vector, 1) ).
+tff(pred_def_acc_bit_3,type, acc_3: $$state_type > $o | $attr($bit_vector, 1) ).
+% Zero bit 0 for vector b
+cnf(b_drop_0,axiom,
+	~b_0(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% Copy bit 0 into 1 for vector b
+cnf(b_set_1_after_0,axiom,
+	~b_0(VarCurr) | b_1(VarNext) | ~$$nextState(VarCurr,VarNext)).
+cnf(b_drop_1_after_0,axiom,
+	b_0(VarCurr) | ~b_1(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% Copy bit 1 into 2 for vector b
+cnf(b_set_2_after_1,axiom,
+	~b_1(VarCurr) | b_2(VarNext) | ~$$nextState(VarCurr,VarNext)).
+cnf(b_drop_2_after_1,axiom,
+	b_1(VarCurr) | ~b_2(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% Copy bit 2 into 3 for vector b
+cnf(b_set_3_after_2,axiom,
+	~b_2(VarCurr) | b_3(VarNext) | ~$$nextState(VarCurr,VarNext)).
+cnf(b_drop_3_after_2,axiom,
+	b_2(VarCurr) | ~b_3(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% 
+% Add bit 0 to accumulator acc from b
+% b(curr) -> acc(next)
+cnf(acc_set_0,axiom,
+	~b_0(VarCurr) | acc_0(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% acc(curr) -> acc(next)
+cnf(acc_copy1_0,axiom,
+	~acc_0(VarCurr) | acc_0(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% ~b(curr), ~acc(curr) -> ~acc(next)
+cnf(acc_copy0_0,axiom,
+	b_0(VarCurr) | acc_0(VarCurr) | ~acc_0(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% 
+% Add bit 1 to accumulator acc from b
+% b(curr) -> acc(next)
+cnf(acc_set_1,axiom,
+	~b_1(VarCurr) | acc_1(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% acc(curr) -> acc(next)
+cnf(acc_copy1_1,axiom,
+	~acc_1(VarCurr) | acc_1(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% ~b(curr), ~acc(curr) -> ~acc(next)
+cnf(acc_copy0_1,axiom,
+	b_1(VarCurr) | acc_1(VarCurr) | ~acc_1(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% 
+% Add bit 2 to accumulator acc from b
+% b(curr) -> acc(next)
+cnf(acc_set_2,axiom,
+	~b_2(VarCurr) | acc_2(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% acc(curr) -> acc(next)
+cnf(acc_copy1_2,axiom,
+	~acc_2(VarCurr) | acc_2(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% ~b(curr), ~acc(curr) -> ~acc(next)
+cnf(acc_copy0_2,axiom,
+	b_2(VarCurr) | acc_2(VarCurr) | ~acc_2(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% 
+% Add bit 3 to accumulator acc from b
+% b(curr) -> acc(next)
+cnf(acc_set_3,axiom,
+	~b_3(VarCurr) | acc_3(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% acc(curr) -> acc(next)
+cnf(acc_copy1_3,axiom,
+	~acc_3(VarCurr) | acc_3(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% ~b(curr), ~acc(curr) -> ~acc(next)
+cnf(acc_copy0_3,axiom,
+	b_3(VarCurr) | acc_3(VarCurr) | ~acc_3(VarNext) | ~$$nextState(VarCurr,VarNext)).
+% 
+% Init clauses:
+% 
+% Init b with 0-th bit on
+cnf(init_b_set_0,axiom,
+	b_0($$constB0)).
+cnf(init_b_drop_1,axiom,
+	~b_1($$constB0)).
+cnf(init_b_drop_2,axiom,
+	~b_2($$constB0)).
+cnf(init_b_drop_3,axiom,
+	~b_3($$constB0)).
+% 
+% 
+% Init acc with 0s everywhere
+cnf(init_acc_drop_0,axiom,
+	~acc_0($$constB0)).
+cnf(init_acc_drop_1,axiom,
+	~acc_1($$constB0)).
+cnf(init_acc_drop_2,axiom,
+	~acc_2($$constB0)).
+cnf(init_acc_drop_3,axiom,
+	~acc_3($$constB0)).
+% 
+% Target clauses: any of basic is true
+% 
+cnf(target_b_bit_0,negated_conjecture,
+	~b_0(sK_VarCurr)).
+cnf(target_b_bit_1,negated_conjecture,
+	~b_1(sK_VarCurr)).
+cnf(target_b_bit_2,negated_conjecture,
+	~b_2(sK_VarCurr)).
+cnf(target_b_bit_3,negated_conjecture,
+	~b_3(sK_VarCurr)).

@@ -1,0 +1,1 @@
+--clausifier VClausifier/vclausify_rel --clausifier_options "--mode clausify -t {0:.2f} -ss axioms -sd 1 -st 2.0" --abstr_ref '[sig;arg_filter;subs]' --abstr_ref_sig_restrict skc --abstr_ref_af_restrict_to_split_sk true --abstr_ref_until_sat false   --schedule none --resolution_flag false --superposition_flag false 

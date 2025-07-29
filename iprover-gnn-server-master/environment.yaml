@@ -1,0 +1,29 @@
+channels:
+  - conda-forge
+  - nvidia
+  - pytorch
+
+dependencies:
+  - python>=3.11
+  - numpy
+  - mkl
+  - orjson
+#  - gcc>=11, <12 # torch-scatter support only gcc <= 11
+#  - gxx>=11, <12
+  - gcc
+  - gxx
+#  - cuda-nvcc=11.7
+#  - cuda-runtime=11.7
+#  - cuda-thrust
+#  - libcusparse-dev=11.7
+  - pytorch
+  - pytorch-cuda
+#  - opam
+#  - bubblewrap  # for opam
+  - ocamlbuild  # for parser
+  - pip
+  - torch-scatter
+#  - pip:
+#    - torch
+#    - torch-scatter
+

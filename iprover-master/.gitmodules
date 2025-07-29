@@ -1,0 +1,6 @@
+[submodule "util/z3"]
+	path = util/z3
+	url = https://github.com/Z3Prover/z3
+[submodule "reasoning-projects"]
+	path = reasoning-projects
+	url = https://gitlab.com/korovin/reasoning-projects.git

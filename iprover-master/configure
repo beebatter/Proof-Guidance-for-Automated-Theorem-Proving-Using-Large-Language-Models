@@ -1,0 +1,156 @@
+#!/bin/bash
+
+# should work under linux
+# for bundeled versions under mac you need insatll gnu gcc and
+# change vars MAC_CC and MAC_CXX accordingly
+
+#set -x 
+
+
+
+MAC_CC=gcc-5.3.0
+MAC_CXX=g++-5.3.0
+
+ocaml_packages=("ocamlgraph" "zarith" "yojson" "z3")
+
+#SYS = "Linux" under linux and "Darwin" under Mac 
+SYS=$(uname -s)
+
+# Compares two version numbers.
+#
+# Exit status: 0 if the first version number is greater or equal to
+# the second one, and 1 otherwise.
+version_geq()
+{
+    test $(echo -e "$1\n$2" | sort  -V | head -n 1) != $2
+}
+
+command_is_installed()
+{
+    command -v $1 &> /dev/null
+}
+
+sys_package_is_installed()
+{
+   if [ "$SYS" = "Linux" ]; 
+   then 
+   	  dpkg -l | grep $1 &> /dev/null
+   else
+        echo "! Check that $1 is installed in your system; assumed that the packe is installed"
+	return 0
+   fi
+}
+
+ocaml_package_is_installed()
+{
+    ocamlfind query $1 &> /dev/null
+}
+
+
+# Checking ocaml
+echo -n "checking for ocamlc..."
+if ! command_is_installed 'ocamlc' ;
+then
+    echo '' 
+    echo 'Error: OCaml needs to be installed'
+    echo 'ocaml can be install using opam'
+    echo '-- insall opam:'
+    echo 'sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)'
+    echo 'opam update'
+    echo ' '
+    echo '-- install ocaml:'
+    echo 'opam switch create 4.14.0+flambda --package=ocaml-variants.4.14.0+options,ocaml-option-flambda'
+    echo '(or replace 4.14.0 with the latest release https://ocaml.org/releases/)'
+    echo 'eval $(opam env)'
+    exit 1
+else
+    echo " $(command -v ocamlc)"
+fi
+
+OCAML_INSTALLED_VERSION=$(command ocamlc --version)
+OCAML_MIN_REQUIRED_VERSION="4.14.0"
+
+echo -n "checking whether ocamlc version >= $OCAML_MIN_REQUIRED_VERSION..."
+if version_geq $OCAML_INSTALLED_VERSION $OCAML_MIN_REQUIRED_VERSION ;
+then
+    echo ''
+    echo "Error: ocaml is version $OCAML_INSTALLED_VERSION, " \
+         "required version >=$OCAML_MIN_REQUIRED_VERSION"
+    echo "-- update ocaml:"
+    echo 'opam update'
+    echo 'opam switch create 4.14.0+flambda --package=ocaml-variants.4.14.0+options,ocaml-option-flambda'
+    echo '(or replace 4.14.0 with the latest release https://ocaml.org/releases/)'
+    echo 'eval $(opam env)'
+    exit 1
+else
+    echo " $OCAML_INSTALLED_VERSION"
+fi
+
+# Checking for ocamlfind
+echo -n 'checking for ocamlfind...'
+if ! command_is_installed 'ocamlfind' ;
+then
+    echo ''
+    echo 'Error: ocamlfind needs to be installed'
+    echo "installing using opam:"
+    echo "opam install ocamlfind"
+    echo 'eval $(opam env)'
+    exit 1
+else
+    echo " $(command -v ocamlfind)"
+fi
+
+if ! sys_package_is_installed 'zlib1g-dev' ;
+then
+    echo '' 
+    echo "Error: zlib dev needs to be installed"
+    echo "in Ubuntu/Debian: sudo apt install zlib1g-dev"
+    exit 1
+else 
+    echo "installed: zlib1g-dev"
+fi
+
+OCAMLLIBSTR="OCAMLLIB=$(ocamlc -where)"
+echo "$OCAMLLIBSTR" > Makefile.extras
+echo "SYS=$SYS" >> Makefile.extras
+
+
+ocaml_missing_packages={}
+
+for pk in ${ocaml_packages[@]}; do
+    echo -n "checking for ocaml package $pk..."    
+    if ! ocaml_package_is_installed $pk ;  then
+        ocaml_missint_packages+="$pk "
+    else
+        echo " $(ocamlfind query $pk)"
+    fi
+done
+
+if [ ${#ocaml_missint_packages[@]} != 0 ]; then
+    echo ""
+    echo "Error: ocaml packages: ${ocaml_missint_packages[@]} are not installed"
+    echo "installing them using opam run:"
+    echo "opam install ${ocaml_missint_packages[@]}"
+    echo 'eval $(opam env)'
+    exit 1
+fi
+
+    
+
+#OCAMLLIBSTR="OCAMLLIB=$(ocamlc -where)"
+#echo "$OCAMLLIBSTR" > Makefile.extras
+#echo "SYS=$SYS" >> Makefile.extras
+
+# if [ -d E_Prover ]; then
+#    if [ "$SYS" = "Darwin" ]; 
+#    then 
+#        CC=$MAC_CC
+#    else
+#        CC=gcc
+#    fi
+#    cd E_Prover 
+#    ./configure
+#    make CC="$CC" 
+#    cp PROVER/eprover ./
+#    cd ../
+# fi

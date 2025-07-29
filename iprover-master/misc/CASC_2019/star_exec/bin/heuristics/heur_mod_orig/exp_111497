@@ -1,0 +1,1 @@
+--clausifier_options '--mode clausify -t {0:.2f} -ss axioms' --clausifier VClausifier/vclausify_rel --schedule none --abstr_ref_under '[cone;quads]'

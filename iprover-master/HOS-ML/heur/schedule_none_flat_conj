@@ -1,0 +1,5 @@
+--clausifier res/vclausify_rel
+--clausifier_options --mode tclausify  --show_fool true -t 100
+--schedule none 
+--sub_typing false
+--prep_eq_flat_conj true
