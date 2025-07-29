@@ -1,2 +1,0 @@
---sat_mode true
---clausifier_options --mode tclausify  --show_fool true -t 100

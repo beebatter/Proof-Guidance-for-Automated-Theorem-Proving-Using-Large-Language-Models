@@ -1,7 +1,0 @@
---clausifier res/vclausify_rel
---clausifier_options --mode tclausify  --show_fool true -t 100
---proof_out false
---sat_finite_models true
---sat_mode true
---schedule none
---stats_out none

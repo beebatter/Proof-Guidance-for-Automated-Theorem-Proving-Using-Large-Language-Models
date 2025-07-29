@@ -1,4 +1,0 @@
---clausifier_options --mode tclausify  --show_fool true -t 100
---schedule none 
---sat_mode true 
---sat_finite_models true  

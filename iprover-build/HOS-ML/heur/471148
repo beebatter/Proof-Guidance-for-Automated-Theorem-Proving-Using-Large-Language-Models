@@ -1,9 +1,0 @@
---clausifier res/vclausify_rel
---inst_out_proof true
---out_options none
---res_out_proof true
---sat_out_model small
---schedule default
---stats_out sel
---clausifier_options --mode tclausify  --show_fool true -t 100
---sub_typing false

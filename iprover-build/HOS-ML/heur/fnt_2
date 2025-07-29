@@ -1,4 +1,0 @@
---out_options none 
---clausifier res/vclausify_rel
---sub_typing false
---clausifier_options --mode tclausify  --show_fool true -t 100
